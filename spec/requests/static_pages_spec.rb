@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe "Static pages" do
   	
+  	# This is a symbol for "Demo app"
+	let(:base_title) { "Demo app" }
+
   	# Test for home page
   	describe "Home page" do
 	    
@@ -14,7 +17,7 @@ describe "Static pages" do
 	    # Test title
 	    it "should have title 'Demo app | home'" do
 	    	visit '/static_pages/home'
-	    	expect(page).to have_title('home')
+	    	expect(page).to have_title("#{base_title} | home")
 	    end # Title
   	end # Home page
 
@@ -51,4 +54,15 @@ describe "Static pages" do
 	    	expect(page).to have_title('about')
 	    end # Title
   	end # About page
+
+
+  	# Test for contact page
+  	describe "Contact page" do
+
+  		# Test header
+  		it "should have my email 'trungtrong456@gmail.com'" do
+  			visit '/static_pages/contact'
+  			expect(page).to have_content('trungtrong456@gmail.com')
+  		end # Header
+  	end # Contact page
 end # Static pages
