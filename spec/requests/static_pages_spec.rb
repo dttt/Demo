@@ -4,65 +4,45 @@ describe "Static pages" do
   	
   	# This is a symbol for "Demo app"
 	let(:base_title) { "Demo app" }
+  subject { page }
 
   	# Test for home page
   	describe "Home page" do
-	    
-	    # Test content
-	    it "should have content 'Demo app'" do
-	    	visit '/static_pages/home'
-	    	expect(page).to have_content('Demo app')  
-	    end # content
+	    before { visit root_path }
 
-	    # Test title
-	    it "should have title 'Demo app | home'" do
-	    	visit '/static_pages/home'
-	    	expect(page).to have_title("#{base_title} | home")
-	    end # Title
-  	end # Home page
+	    it { should have_content('Demo app') }  
+
+	    it { should have_title(full_title('')) }
+      
+    end # Home page
 
 
   	# Test for help page
   	describe "Help page" do
-  		
-  		# Test header 
-  		it "should have content 'Help'" do
-  			visit '/static_pages/help'
-  			expect(page).to have_content('Help')
-  		end #content
+  		before { visit help_path }
 
-  		# Test title
-	    it "should have title 'Demo app | help'" do
-	    	visit '/static_pages/help'
-	    	expect(page).to have_title('help')
-	    end # Title
+  		it { should have_content('Help') }
+
+	    it { should have_title(full_title('help')) }
   	end # Help page
 
 
   	# Test for about page
   	describe "About page" do
+      before { visit about_path }
 
-  		# Test header
-  		it "should have my name 'Trung Doan'" do
-  			visit '/static_pages/about'
-  			expect(page).to have_content('Trung Doan')
-  		end # Test header
+  		it { should have_content('Trung Doan') }
 
-  		# Test title
-	    it "should have title 'Demo app | about'" do
-	    	visit '/static_pages/about'
-	    	expect(page).to have_title('about')
-	    end # Title
+	    it { should have_title('about') }
   	end # About page
 
 
   	# Test for contact page
   	describe "Contact page" do
+      before { visit contact_path }
+  		
+  		it { should have_content('trungtrong456@gmail.com') }
 
-  		# Test header
-  		it "should have my email 'trungtrong456@gmail.com'" do
-  			visit '/static_pages/contact'
-  			expect(page).to have_content('trungtrong456@gmail.com')
-  		end # Header
+      it { should have_title('contact') } 
   	end # Contact page
 end # Static pages
