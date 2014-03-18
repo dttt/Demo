@@ -1,8 +1,5 @@
 Demo2::Application.routes.draw do
-  get "users/new"
-
-  
-  
+  resources :users 
   # routes for static pages 
   root 'static_pages#home'
 
