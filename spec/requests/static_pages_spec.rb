@@ -6,14 +6,17 @@ describe "Static pages" do
 	let(:base_title) { "Demo app" }
   subject { page }
 
+  shared_examples_for "all static pages" do
+    it { should have_selector('h1', text: heading) }
+    it { should have_title(full_title(page_title)) }
+  end
+
   	# Test for home page
   	describe "Home page" do
 	    before { visit root_path }
 
-	    it { should have_content('Demo app') }  
-
-	    it { should have_title(full_title('')) }
-      
+	    let(:heading) { 'Demo app' }  
+	    let(:page_title) { '' }
     end # Home page
 
 
@@ -21,9 +24,10 @@ describe "Static pages" do
   	describe "Help page" do
   		before { visit help_path }
 
-  		it { should have_content('Help') }
+  		let(:heading) { 'Help' }
+	    let(:page_title) { 'help' }
 
-	    it { should have_title(full_title('help')) }
+      it_should_behave_like "all static pages"
   	end # Help page
 
 
@@ -31,9 +35,10 @@ describe "Static pages" do
   	describe "About page" do
       before { visit about_path }
 
-  		it { should have_content('Trung Doan') }
+  		let(:heading) { 'Trung Doan' }
+	    let(:page_title) { 'about' }
 
-	    it { should have_title('about') }
+      it_should_behave_like "all static pages"
   	end # About page
 
 
@@ -41,8 +46,11 @@ describe "Static pages" do
   	describe "Contact page" do
       before { visit contact_path }
   		
-  		it { should have_content('trungtrong456@gmail.com') }
+  		let(:heading) { 'trungtrong456@gmail.com' }
+      let(:page_title) { 'contact' } 
 
-      it { should have_title('contact') } 
+      it_should_behave_like "all static pages"
+
+      it { should have_selector('h1', text: 'trungtrong456@gmail.com') }
   	end # Contact page
-end # Static pages
+end 
